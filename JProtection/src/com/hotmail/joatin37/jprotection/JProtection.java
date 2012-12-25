@@ -106,6 +106,7 @@ public class JProtection extends JavaPlugin implements Listener{
 			}
 		}
 		return map;
+		
 	}
 	private HashMap<String, Boolean> getPreparedEntityAutoMap(){
 		HashMap<String, Boolean>map=new HashMap<String, Boolean>();
