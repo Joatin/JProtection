@@ -19,6 +19,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.ChatPaginator;
 
 public class EntityLock {
 	
@@ -34,7 +35,9 @@ public class EntityLock {
 	}
 	
 	public void getInfo(Entity entity, Player player){
-		//TODO
+		EntityProtection lock = locks.get(entity.getUniqueId());
+		player.sendMessage(ChatPaginator.wordWrap(jprotect.getConfig().getString("messages.entityinfo", "§2Owner: §4[owner]\n§2Protected: [protected]\n§2Password: §4[password]\n§2Friends: §e[friendslist]").replace("[owner]", lock.getOwner()), 119));
+		
 	}
 	
 	public boolean isLocked(Entity entity){

@@ -74,6 +74,7 @@ messages:
   successfullylockedthisblocktoplayer: §2Successfully locked this block to [player]!
   youdonthavepermissiontointeractwiththisblock: §4You don't have permision to interact with this block!
   youarenotallowedtodamagethisblock: §4You are not allowed to damage this block!
+  entityinfo:
 
 deletion:
   time: 0
