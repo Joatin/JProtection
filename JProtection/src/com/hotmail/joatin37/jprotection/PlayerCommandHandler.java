@@ -1,0 +1,157 @@
+package com.hotmail.joatin37.jprotection;
+
+import java.util.Iterator;
+
+import org.bukkit.command.Command;
+import org.bukkit.entity.Player;
+
+public class PlayerCommandHandler {
+	
+	private JProtection jprotection;
+
+	PlayerCommandHandler(JProtection jp){
+		jprotection = jp;
+	}
+	
+	public void onCommand(Player player, Command cmd, String label, String[] args){
+		switch(args[0].toLowerCase()){
+		case "lock":if(args.length==1){
+			jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]);
+			player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttolock", "§2Type the entity or block you wan't to lock"));
+		}else{
+			if(args.length==2){
+				jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]+":"+args[1]);
+				player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttolocktoplayer", "§2Type the entity or block you wan't to lock to player [player]").replace("[player]", args[1]));
+				if(jprotection.getServer().getPlayer(args[1])==null){
+					player.sendMessage(jprotection.getConfig().getString("messages.notethisplayerisnotonline", "§4Note! This player is not online"));
+				}
+			}else{
+				player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+			}
+		}
+			
+			break;
+		case "unlock":if(args.length==1){
+			jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]);
+			player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttounlock", "§2Type the entity or block you wan't to unlock"));
+		}else{
+			player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+		}
+			break;
+		case "toggle":if(args.length==1){
+			player.sendMessage(jprotection.getConfig().getString("messages.tofewarguments", "§eYou have entered to few arguments, type §2/jprotection help§e, for help"));
+		}else{
+			if(args.length==2){
+				if(args[1].equals("protected")){
+				jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]+":"+args[1]);
+				player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttotoggle", "§2Type the entity or block you wan't to toggle"));
+				}else{
+					player.sendMessage(jprotection.getConfig().getString("messages.unknowwcommand", "§eYou have entered a unknown command"));
+				}
+				}else{
+				player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+			}
+		}
+			break;
+		case "plugininfo":if(args.length==1){
+			displayPluginInfo(player);
+		}else{
+			player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+		}
+			break;
+		case "me":if(args.length==1){
+			displayMyInfo(player);
+		}else{
+			if(args.length==2){
+				switch (args[1]){
+				case "info": displayMyInfo(player);
+					break;
+				case "help": //TODO
+					break;
+				case "toggle": //TODO
+					break;
+				case "isauto": //TODO
+					break;
+				case "isprotect": //TODO
+					break;
+				
+				default:
+					player.sendMessage(jprotection.getConfig().getString("messages.unknowwcommand", "§eYou have entered a unknown command"));
+					break;
+				}
+			}
+		}
+			break;
+		case "add":if(args.length==1){
+			player.sendMessage(jprotection.getConfig().getString("messages.tofewarguments", "§eYou have entered to few arguments, type §2/jprotection help§e, for help"));	
+		}else{
+			if(args.length==2){
+				jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]+":"+args[1]);
+				player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttoaddyourfriendto", "§2Type the entity or block you wan't to add your friend [friend] to").replace("[friend]", args[1]));
+				if(jprotection.getServer().getPlayer(args[1])==null){
+					player.sendMessage(jprotection.getConfig().getString("messages.notethisplayerisnotonline", "§4Note! This player is not online"));
+				}
+			}else{
+				player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+			}
+		}
+			break;
+		case "info":if(args.length==1){
+			jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]);
+			player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttogetinfoon", "§2Type the entity or block you wan't to get info on"));
+		}else{
+			player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+		}
+			break;
+		case "persist":
+			if(jprotection.getPlayerHandle(player.getName()).isPersist()){
+				jprotection.getPlayerHandle(player.getName()).setPersist(false);
+				player.sendMessage(jprotection.getConfig().getString("messages.persistoff", "§eToggled persist mode §4OFF"));
+			}else{
+				jprotection.getPlayerHandle(player.getName()).setPersist(true);
+				player.sendMessage(jprotection.getConfig().getString("messages.persiston", "§eToggled persist mode §2ON"));
+			}
+			break;
+		case "setpassword":if(args.length==1){
+			player.sendMessage(jprotection.getConfig().getString("messages.tofewarguments", "§eYou have entered to few arguments, type §2/jprotection help§e, for help"));	
+		}else{
+			if(args.length==2){
+				jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]+":"+args[1]);
+				player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttoaddpasswordto", "§2Type the entity or block you wan't to add a password to"));
+				if(jprotection.getServer().getPlayer(args[1])==null){
+					player.sendMessage(jprotection.getConfig().getString("messages.notethisplayerisnotonline", "§4Note! This player is not online"));
+				}
+			}else{
+				player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+			}
+		}
+			break;
+		case "removepassword":if(args.length==1){
+			jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]);
+			player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttoremovethepasswordfrom", "§2Type the entity or block you wan't to remove the password from"));
+		}else{
+			player.sendMessage(jprotection.getConfig().getString("messages.tomanyarguments", "§eYou have entered to many arguments, type §2/jprotection help§e, for help"));
+		}
+			break;
+		case "cancel": jprotection.getPlayerHandle(player.getName()).setCurrentcommand(null);
+		player.sendMessage(jprotection.getConfig().getString("messages.cancelledcommand", "§eCancelled your current command"));
+		break;
+		}
+	}
+	
+	private void displayPluginInfo(Player player){
+		
+	}
+	
+	private void displayMyInfo(Player player){
+		PlayerHandle handle = jprotection.getPlayerHandle(player.getName());
+		String s = jprotection.getConfig().getString("messages.myinfofriendcolor", "§e");
+		Iterator<String> iterator = handle.getFrienList().iterator();
+		player.sendMessage(jprotection.getConfig().getString("messages.myinfo", "§4------/////§eMY INFO§4/////------"));
+		player.sendMessage(jprotection.getConfig().getString("messages.myinfolocks", "§eYou have §4[numlocks]§e locks, and §4[numchests]§e of them are chests.").replace("[numlocks]", Integer.toString(handle.getAmountlocks()).replace("[numchests]", Integer.toString(handle.getAmountchests()))));
+		player.sendMessage(jprotection.getConfig().getString("messages.myinfofriends", "§eAnd you have §4[numfriends]§e friends").replace("[numfriends]", Integer.toString(handle.getAmountFriends())));
+		while(iterator.hasNext()){
+			player.sendMessage(s+iterator.next());
+		}
+	}
+}

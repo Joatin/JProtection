@@ -1,0 +1,80 @@
+protection:
+  lockondeath: true
+  blocks:
+    - 2
+    - 26
+    - 54
+    - 61
+  entities:
+    - 18
+    - 9
+    - 120
+    - 99
+    - 98
+    - 97
+    - 96
+    - 95
+    - 93
+    - 92
+    - 91
+    - 90
+
+price:
+  blocks:
+    2: 1.5
+  entities:
+
+autoprotect:
+  lockondeath: true
+  blocks:
+  entities:
+    - 18
+    - 9
+
+protect:
+  blocks:
+  entities:
+
+messages:
+  thisentityisalreadylocked: §4This [entity] is already locked!
+  thisentitytypecantbelocked: §4This entity type ([entity]) can't be locked!
+  youdonthavepermissiontomakelocks: §4You don't have permission to create locks
+  successfullylockedthisentity: §2Successfully locked this [entity]!
+  amountwaswithdrawnfromyouracount: §e[amount] was withdrawn from your acount
+  failedtolockthisentity: §4Failed to lock this [entity]!
+  youdonthavemasterlockpermission: §eYou don't have permission to create locks this way
+  successfullylockedthisentitytoplayer: §2Successfully locked this [entity] to [player]!
+  persistoff: §eToggled persist mode §4OFF
+  persiston: §eToggled persist mode §2ON
+  tomanyarguments: §eYou have entered to many arguments, type §2/jprotection help§e, for help
+  typethethingyouwanttolock: §2Type the entity or block you wan't to lock
+  typethethingyouwanttolocktoplayer: §2Type the entity or block you wan't to lock to player [player]
+  typethethingyouwanttounlock: §2Type the entity or block you wan't to unlock
+  cancelledcommand: §eCancelled your current command
+  notethisplayerisnotonline: §4Note! This player is not online
+  typethethingyouwanttogetinfoon: §2Type the entity or block you wan't to get info on
+  yousuccesfullyromevedthislock: §eYou succesfully romeved this lock
+  youarenottheownerofthislock: §4You are not the owner of this lock!
+  youdonthavepermissiontointeractwiththisentity: §4You don't have permision to interact with this [entity]!
+  tofewarguments: §eYou have entered to few arguments, type §2/jprotection help§e, for help
+  unknowwcommand: §eYou have entered a unknown command
+  typethethingyouwanttoaddyourfriendto: §2Type the entity or block you wan't to add your friend [friend] to
+  typethethingyouwanttotoggle: §2Type the entity or block you wan't to toggle
+  myinfo: §4------/////§eMY INFO§4/////------"
+  myinfolocks: §eYou have §4[numlocks]§e locks, and §4[numchests]§e of them are chests.
+  myinfofriends: §eAnd you have §4[numfriends]§e friends
+  myinfofriendcolor: §e
+  typethethingyouwanttoremovethepasswordfrom: §2Type the entity or block you wan't to remove the password from
+  typethethingyouwanttoaddpasswordto: §2Type the entity or block you wan't to add a password to
+  youarenotallowedtobreakthisentity: §4You are not allowed to break this [entity]
+  thisblockisalreadylocked: §4This block is already locked!
+  thisblocktypecantbelocked: §4This blocktype can't be locked
+  failedtolockthisblock: §4Failed to lock this block!
+  successfullylockedthisblock: §2Successfully locked this block!
+  successfullylockedthisblocktoplayer: §2Successfully locked this block to [player]!
+  youdonthavepermissiontointeractwiththisblock: §4You don't have permision to interact with this block!
+  youarenotallowedtodamagethisblock: §4You are not allowed to damage this block!
+
+deletion:
+  time: 0
+  preserve:

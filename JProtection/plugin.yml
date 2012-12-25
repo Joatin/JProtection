@@ -1,0 +1,27 @@
+name: JProtection
+main: com.hotmail.joatin37.jprotection.JProtection
+version: 0.1.0-1.4.6
+description: Protects all blocks and entities.
+author: Joatin
+load: POSTWORLD
+softdepend: [Vault]
+commands:
+  JProtection:
+    aliases: [j, jprotection, protect]
+    description: The base command for the plugin.
+permssions:
+  jprotection.admin.*:
+    description: Gives acces to all functions.
+  jprotection.admin.lockmaster:
+    description: Allows you to manage all locks.
+    default: op
+  jprotection.locker.*:
+    description: Gives you the ability to lock both blocks and entities.
+    default: true
+    children:
+      jprotection.locker.entitylocker: true
+      jprotection.locker.blocklocker: true
+  jprotection.locker.entitylocker:
+    description: Allows you to create locks on entities.
+  jprotection.locker.blocklocker:
+    description: Allows you to create locks on blocks.
