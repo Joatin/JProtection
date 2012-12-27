@@ -1,8 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background: #151515 url("../images/bkg.png") 0 0;
-  color: #eaeaea;
+  background: rgba(255, 255, 255, 0.8)  0 0;
+  color: rgba(0, 0, 0, 1);
   font: 16px;
   line-height: 1.5;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
@@ -36,7 +36,7 @@ li {
 */
 
 header {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 1);
   width: 100%;
   border-bottom: 1px dashed #b5e853;
   padding: 20px 0;
@@ -82,7 +82,8 @@ header h2 {
   -webkit-font-smoothing: antialiased;
 }
 section img {
-  max-width: 100%
+  max-width: 100%;
+    width: 407px;
 }
 
 h1, h2, h3, h4, h5, h6 {
