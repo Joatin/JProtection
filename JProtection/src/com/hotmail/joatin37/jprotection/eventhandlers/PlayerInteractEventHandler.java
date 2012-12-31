@@ -25,12 +25,15 @@ public class PlayerInteractEventHandler {
 				break;
 			case "unlock": jprotect.blocklock.unlock(event.getClickedBlock(), event.getPlayer());
 				break;
-			case "info":
+			case "info":jprotect.blocklock.getInfo(event.getClickedBlock(), event.getPlayer());
 				break;
 			default:
 				String[] s = jprotect.getPlayerHandle(event.getPlayer().getName()).getCurrentcommand().split(":");
 				if(s[0].equals("lock")){
 					jprotect.blocklock.lock(event.getClickedBlock(), event.getPlayer(), s[1]);
+				}
+				if(s[0].equals("add")){
+					jprotect.blocklock.addFriend(event.getClickedBlock(), event.getPlayer(), s[1]);
 				}
 				break;
 			

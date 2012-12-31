@@ -36,7 +36,19 @@ public class EntityLock {
 	
 	public void getInfo(Entity entity, Player player){
 		EntityProtection lock = locks.get(entity.getUniqueId());
-		player.sendMessage(ChatPaginator.wordWrap(jprotect.getConfig().getString("messages.entityinfo", "§2Owner: §4[owner]\n§2Protected: [protected]\n§2Password: §4[password]\n§2Friends: §e[friendslist]").replace("[owner]", lock.getOwner()), 119));
+		if(lock==null){
+			player.sendMessage(jprotect.getConfig().getString("messages.entityinfonolock", "§eThis [entity] doesn't have any protection").replace("[entity]", entity.getType().getName()));
+			return;
+		}
+		Iterator<String> it = lock.getAllowedUsers().iterator();
+		String s="";
+		while(it.hasNext()){
+			s=s+it.next()+", ";
+		}
+		player.sendMessage(ChatPaginator.wordWrap(jprotect.getConfig().getString("messages.entityinfo", "§2Owner: §4[owner]\n§2Protected: [protected]\n§2Password: §4[password]\n§2Friends: §e[friendslist]").replace("[owner]", lock.getOwner()).replace("[protected]", ""+lock.isProtected()).replace("[password]", lock.getPassword(player)).replace("[friendslist]", s), 119));
+		
+	}
+	public void toggle(Entity entity, Player player){
 		
 	}
 	
@@ -57,6 +69,17 @@ public class EntityLock {
 	}
 	public void removelock(Entity entity){
 		locks.remove(entity.getUniqueId());
+	}
+	
+	public void addFriend(Entity entity, Player player, String friend){
+		if(locks.get(entity.getUniqueId())!=null){
+			if(locks.get(entity.getUniqueId()).addFriend(player, friend)){
+				player.sendMessage(jprotect.getConfig().getString("messages.yousuccesfullyaddedfriend", "§eYou succesfully added "+friend+" to this looks friendlist"));
+			}else{
+				player.sendMessage(jprotect.getConfig().getString("messages.youcantaddthisfriend", "§4You cant add this friend to this lock"));
+			}
+		}
+			
 	}
 	
 	public void unlock(Entity entity, Player player){

@@ -17,7 +17,9 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.ChatPaginator;
 
 
 public class BlockLock {
@@ -39,6 +41,20 @@ public class BlockLock {
 	
 	public boolean hasLock(Block block){
 		return locks.get(block.getLocation())!=null;
+	}
+	
+	public void getInfo(Block block, Player player){
+		BlockProtection lock = locks.get(block.getLocation());
+		if(lock==null){
+			player.sendMessage(jprotect.getConfig().getString("messages.blockinfonolock", "§eThis [block] doesn't have any protection").replace("[block]", block.getType().toString()));
+			return;
+		}
+		Iterator<String> it = lock.getAllowedUsers().iterator();
+		String s="";
+		while(it.hasNext()){
+			s=s+it.next()+", ";
+		}
+		player.sendMessage(ChatPaginator.wordWrap(jprotect.getConfig().getString("messages.blockinfo", "§2Owner: §4[owner]\n§2Protected: [protected]\n§2Password: §4[password]\n§2Friends: §e[friendslist]").replace("[owner]", lock.getOwner()).replace("[protected]", ""+lock.isProtected()).replace("[password]", lock.getPassword(player)).replace("[friendslist]", s), 119));
 	}
 	
 	public void unlock(Block block, Player player){
@@ -118,6 +134,17 @@ public class BlockLock {
 	    }
 	}
 	
+	public void addFriend(Block block, Player player, String friend){
+		if(locks.get(block.getLocation())!=null){
+			if(locks.get(block.getLocation()).addFriend(player, friend)){
+				player.sendMessage(jprotect.getConfig().getString("messages.yousuccesfullyaddedfriend", "§eYou succesfully added "+friend+" to this looks friendlist"));
+			}else{
+				player.sendMessage(jprotect.getConfig().getString("messages.youcantaddthisfriend", "§4You cant add this friend to this lock"));
+			}
+		}
+			
+	}
+	
 	public void save() {
 		if (blockConfig == null || blockConfigFile == null) {
 	    return;
@@ -137,6 +164,7 @@ public class BlockLock {
 	}
 
 	public boolean allowsInteraction(Block block, Player player) {
+		if(block==null)return true;
 		if(locks.get(block.getLocation())!=null){
 		return locks.get(block.getLocation()).allowsInteraction(player.getName());
 		}else{

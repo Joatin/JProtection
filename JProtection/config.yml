@@ -1,3 +1,4 @@
+maxamountlocks: 30
 protection:
   lockondeath: true
   blocks:

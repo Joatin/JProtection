@@ -1,6 +1,6 @@
 name: JProtection
 main: com.hotmail.joatin37.jprotection.JProtection
-version: 0.1.0
+version: 0.2.0
 description: Protects all blocks and entities.
 author: Joatin
 load: POSTWORLD

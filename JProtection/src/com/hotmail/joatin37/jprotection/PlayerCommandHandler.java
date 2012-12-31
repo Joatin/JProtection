@@ -16,8 +16,12 @@ public class PlayerCommandHandler {
 	public void onCommand(Player player, Command cmd, String label, String[] args){
 		switch(args[0].toLowerCase()){
 		case "lock":if(args.length==1){
-			jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]);
-			player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttolock", "§2Type the entity or block you wan't to lock"));
+			if(jprotection.getPlayerHandle(player.getName()).getAmountlocks()>jprotection.getConfig().getInt("maxamountlocks")){
+				player.sendMessage(jprotection.getConfig().getString("messages.youhaveexededmaxamount", "§4You have alread exeded the max amount"));
+			}else{
+				jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]);
+				player.sendMessage(jprotection.getConfig().getString("messages.typethethingyouwanttolock", "§2Type the entity or block you wan't to lock"));
+			}
 		}else{
 			if(args.length==2){
 				jprotection.getPlayerHandle(player.getName()).setCurrentcommand(args[0]+":"+args[1]);

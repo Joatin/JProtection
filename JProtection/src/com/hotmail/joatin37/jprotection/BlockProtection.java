@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 public class BlockProtection {
 
@@ -40,6 +41,33 @@ public class BlockProtection {
 		}
 	}
 	
+	public boolean isProtected(){
+		return protect;
+	}
+	
+	public boolean addFriend(Player player, String friend){
+		if(player.getName().equals(owner)){
+			if(!allowedusers.contains(friend)){
+				allowedusers.add(friend);
+			}
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public String getPassword(Player player){
+		if(password!=null){
+		if(player.getName().equals(owner)||player.hasPermission("jprotection.admin.lockmaster")){
+			return password;
+		}else{
+			return "*****";
+		}
+		}else{
+			return "None";
+		}
+	}
+	
 	public String save(FileConfiguration config){
 		String s = loc.getWorld().getName()+";"+loc.getX()+";"+loc.getY()+";"+loc.getZ();
 		config.set(s+".owner", owner);
@@ -55,6 +83,10 @@ public class BlockProtection {
 
 	public String getOwner() {
 		return owner;
+	}
+
+	public List<String> getAllowedUsers() {
+		return allowedusers;
 	}
 
 

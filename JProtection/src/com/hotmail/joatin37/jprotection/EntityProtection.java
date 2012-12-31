@@ -30,6 +30,37 @@ public class EntityProtection {
 		this.password=config.getString(uuid+".password");
 	}
 	
+	public boolean addFriend(Player player, String friend){
+		if(player.getName().equals(owner)){
+			if(!allowedusers.contains(friend)){
+				allowedusers.add(friend);
+			}
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean isProtected(){
+		return protect;
+	}
+	
+	public List<String> getAllowedUsers(){
+		return allowedusers;
+	}
+	
+	public String getPassword(Player player){
+		if(password!=null){
+		if(player.getName().equals(owner)||player.hasPermission("jprotection.admin.lockmaster")){
+			return password;
+		}else{
+			return "*****";
+		}
+		}else{
+			return "None";
+		}
+	}
+	
 	public String save(FileConfiguration config){
 		String s = uuid.getMostSignificantBits()+";"+uuid.getLeastSignificantBits();
 		config.set(s+".owner", owner);

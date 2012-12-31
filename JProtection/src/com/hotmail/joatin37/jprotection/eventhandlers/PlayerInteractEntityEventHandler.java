@@ -28,6 +28,8 @@ public class PlayerInteractEntityEventHandler {
 			case "unlock":
 				jprotect.entitylock.unlock(event.getRightClicked(), event.getPlayer());
 				break;
+			case "toggle":
+				break;
 			default: 
 				String[] s = jprotect.getPlayerHandle(event.getPlayer().getName()).getCurrentcommand().split(":");
 				if(s[0].equals("lock")){
@@ -35,6 +37,9 @@ public class PlayerInteractEntityEventHandler {
 				}
 				if(s[0].equals("toggle")){
 					
+				}
+				if(s[0].equals("add")){
+					jprotect.entitylock.addFriend(event.getRightClicked(), event.getPlayer(), s[1]);
 				}
 			}
 			event.setCancelled(true);
